@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+//import { ComponentFactoryResolver } from '@angular/core/src/render3/component_ref';
 
 @Component({
   selector: 'app-root',
@@ -6,16 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-ivy';
-
-  constructor () {}
+  
+  @ViewChild('ivyCmpContainer') 'ivyCmpContainer': ViewContainerRef;
+  
+  constructor (private vcr: ViewContainerRef) {}
 
   ngOnInit() {
     
   }
 
   insertIvyCmp () {
-    //import('ivy').then(({IvyComponent}) => {});
+    console.log(this.ivyCmpContainer);
+    
+    import('./ivy/ivy.component').then(({IvyComponent}) => {
+      
+      //const compoFactory = this.ivyCmpFacktory.resolveComponentFactory(IvyComponent);
+      //this.vcr.createComponent(compoFactory);
+      console.log(IvyComponent);
+    });
   }
   
 
